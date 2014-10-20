@@ -4,7 +4,7 @@
    },
    "browser_action": {
       "default_icon": "logo.png",
-      "default_title": "DOGEticker"
+      "default_title": "tickerDOGE"
    },
    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
    "description": "See the latest Dogecoin exchange rate to Bitcoin through Cryptsy.com",
@@ -12,8 +12,8 @@
       "128": "logo.png"
    },
    "manifest_version": 2,
-   "name": "DOGEticker",
+   "name": "tickerDOGE",
    "permissions": [ "http://pubapi.cryptsy.com/" ],
    "update_url": "http://clients2.google.com/service/update2/crx",
-   "version": "0.0.1"
+   "version": "0.0.2"
 }
