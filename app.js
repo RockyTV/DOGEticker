@@ -1,10 +1,9 @@
 DOGEticker = {
 
-    url: "http://rockytv.url.ph/price.txt",
-	urlGrab: "http://rockytv.url.ph/grab.php",
-    reloadInterval: 600000, // 10 mins in ms
+    url: "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132",
+    reloadInterval: 300000, // 5 mins in ms
 
-    badgeBackgroundColor: [186, 159, 51, 255], // yellow
+    badgeBackgroundColor: [186, 159, 51, 255], // brown
     clearBadgeTextTimeout: 10000, // 10 secs in ms
 
     changeTooltipText: function(text){ chrome.browserAction.setTitle({title: text}); },
@@ -13,33 +12,14 @@ DOGEticker = {
     changeBadgeBackgroundColor: function(color){ 
         chrome.browserAction.setBadgeBackgroundColor({color: color}); 
     },
-
-	loadPrice: function(){
-		var scope = this;
-		var xhr = new XMLHttpRequest();
-		
-		xhr.open("GET", this.urlGrab, true);
-		xhr.onreadstatechange = function() {
-			if ((xhr.readyState == 4) && (xhr.status == 200)) {
-				scope.loadQuote();
-			}
-		}
-	},
 	
     loadQuote: function(){
         var scope = this;
-        var xhr = new XMLHttpRequest();
-    
-        xhr.open("GET", this.url, true);
-        xhr.onreadystatechange = function() {
-          if ((xhr.readyState == 4) && (xhr.status == 200)) {
-              var actualQuote = xhr.responseText * 100000000;
-              //if (actualQuote.match(/^\d+(?:\,\d*)$/)) {
-                scope.onloadQuote(actualQuote);
-              //}
-          }
-        }
-        xhr.send();
+		
+		$.getJSON(this.url, function(data){
+			var lastPrice = data['return']['markets']['DOGE']['lasttradeprice'] * 100000000;
+			scope.onloadQuote(lastPrice);
+		});
     },
 
     onloadQuote: function(actualQuote){
@@ -58,7 +38,7 @@ DOGEticker = {
 
     startReloadInterval: function(){
         var scope = this;
-        window.setInterval(function(){ scope.loadPrice(); }, this.reloadInterval);
+        window.setInterval(function(){ scope.loadQuote(); }, this.reloadInterval);
     },
     
     trackEvent: function(category, action){
@@ -68,7 +48,7 @@ DOGEticker = {
     init: function(){
         this.changeBadgeBackgroundColor(this.badgeBackgroundColor);
         this.attachBehaviors();
-    
+		
         this.loadQuote();
         this.startReloadInterval();
     }

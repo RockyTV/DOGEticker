@@ -13,7 +13,7 @@
    },
    "manifest_version": 2,
    "name": "DOGEticker",
-   "permissions": [ "http://pubapi.cryptsy.com/", "http://rockytv.url.ph/" ],
+   "permissions": [ "http://pubapi.cryptsy.com/" ],
    "update_url": "http://clients2.google.com/service/update2/crx",
    "version": "0.0.1"
 }
