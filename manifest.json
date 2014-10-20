@@ -1,0 +1,19 @@
+{
+   "background": {
+      "page": "app.html"
+   },
+   "browser_action": {
+      "default_icon": "logo.png",
+      "default_title": "DOGEticker"
+   },
+   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+   "description": "See the latest Dogecoin exchange rate to Bitcoin through Cryptsy.com",
+   "icons": {
+      "128": "logo.png"
+   },
+   "manifest_version": 2,
+   "name": "DOGEticker",
+   "permissions": [ "http://pubapi.cryptsy.com/", "http://rockytv.url.ph/" ],
+   "update_url": "http://clients2.google.com/service/update2/crx",
+   "version": "0.0.1"
+}
